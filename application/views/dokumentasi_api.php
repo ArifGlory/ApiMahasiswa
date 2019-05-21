@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>REST API Mahasiswa</title>
+    <title>Dokumentasi API</title>
 
     <style type="text/css">
 
@@ -71,18 +71,31 @@
 <body>
 
 <div id="container">
-    <h1>REST API Mahasiswa</h1>
+    <h1>REST API Mahasiswa Dokumentasi</h1>
 
     <div id="body">
 
+    <h3>Mahasiswa</h3>
+    <ul>
+    <li>Menampilkan Daftar Data Mahasiswa : /mahasiswa/listMahasiswa</li>
+    <li>Menampilkan Rincian Data Mahasiswa : /mahasiswa/detailMahasiswa/NPM </li>
+    </ul>
+    <br>
+    <hr/>
+    <h3>Dosen</h3>
+    <ul>
+    <li>Menampilkan Daftar Data Dosen : /dosen/listDosen</li>
+    <li>Menampilkan Rincian Data Dosen : /dosen/detailDosen/Nip </li>
+    </ul>
+    <br>
+    <hr/>
+    <h3>Program Studi</h3>
+    <ul>
+    <li>Menampilkan Daftar Data Program Studi : /studi/listStudi</li>
+    <li>Menampilkan Rincian Data Program Studi : /dosen/detailStudi/id-program-studi </li>
+    </ul>
+
        
-
-        <?php if (file_exists(FCPATH.'documentation/index.html')) : ?>
-        <h2><a href="<?php echo base_url();?>/Welcome/dokuemntasiAPI" target="_blank">Dokumentasi API ini</a></h2>
-        <?php endif ?>
-
-        <h3>Selamat datang di API Mahasiswa,.</h3>
-        <h4>PAge ini hanya untuk testing koneksi</h4>
 
     </div>
 
