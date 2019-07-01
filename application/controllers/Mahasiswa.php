@@ -22,5 +22,45 @@ class Mahasiswa extends REST_Controller{
         $this->response($mahasiswa, 200);
     }
 
+    function addMahasiswa_post(){
+        $data   = $this->input->post();
+        $insert =  $this->The_Model->saveMahasiswa($data);
+
+        if($insert){
+            $message = "Berhasil menaambahkan  data mahasiswa";
+            $this->response($message,200);
+        }else{
+            $this->response(array('status' => 'fail', 502));
+        }
+        
+    }
+
+    function editMahasiswa_post(){
+        $data   = $this->input->post();
+        $npm    =  $data['npm'];
+        unset($data['npm']);
+
+        $update =  $this->The_Model->updateMahasiswa($npm,$data);
+        
+        if($update){
+            $message = "Berhasil mengubah  data mahasiswa";
+            $this->response($message,200);
+        }else{
+            $this->response(array('status' => 'fail', 502));
+        }
+
+    }
+
+    function deleteMahasiswa_get($npm){
+        $delete = $this->The_Model->dropMahasiswa($npm);
+      
+        if($delete){
+            $message = "Berhasil menghapus  data mahasiswa";
+            $this->response($message,200);
+        }else{
+            $this->response(array('status' => 'fail', 502));
+        }
+    }
+
     
 }

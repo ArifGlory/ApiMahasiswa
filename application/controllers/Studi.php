@@ -22,5 +22,45 @@ class Studi extends REST_Controller{
         $this->response($studi, 200);
     }
 
+    function addStudi_post(){
+        $data   = $this->input->post();
+        $insert =  $this->The_Model->saveStudi($data);
+
+        if($insert){
+            $message = "Berhasil menaambahkan  data Studi";
+            $this->response($message,200);
+        }else{
+            $this->response(array('status' => 'fail', 502));
+        }
+        
+    }
+
+    function editStudi_post(){
+        $data   = $this->input->post();
+        $idStudi    =  $data['id_program_studi'];
+        unset($data['id_program_studi']);
+
+        $update =  $this->The_Model->updateStudi($idStudi,$data);
+        
+        if($update){
+            $message = "Berhasil mengubah  data Studi";
+            $this->response($message,200);
+        }else{
+            $this->response(array('status' => 'fail', 502));
+        }
+
+    }
+
+    function deleteStudi_get($idStudi){
+        $delete = $this->The_Model->dropStudi($idStudi);
+      
+        if($delete){
+            $message = "Berhasil menghapus  data Studi";
+            $this->response($message,200);
+        }else{
+            $this->response(array('status' => 'fail', 502));
+        }
+    }
+
     
 }

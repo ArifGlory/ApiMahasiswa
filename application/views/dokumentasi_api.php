@@ -77,22 +77,31 @@
 
     <h3>Mahasiswa</h3>
     <ul>
-    <li>Menampilkan Daftar Data Mahasiswa : /mahasiswa/listMahasiswa</li>
-    <li>Menampilkan Rincian Data Mahasiswa : /mahasiswa/detailMahasiswa/NPM </li>
+    <li>Menampilkan Daftar Data Mahasiswa   : /mahasiswa/listMahasiswa</li>
+    <li>Menampilkan Rincian Data Mahasiswa  : /mahasiswa/detailMahasiswa/NPM </li>
+    <li>Menambahkan Data Mahasiswa          : /mahasiswa/addMahasiswa </li>
+    <li>Mengubah Data Mahasiswa             : /mahasiswa/editMahasiswa </li>
+    <li>Menghapus Data Mahasiswa            : /mahasiswa/deleteMahasiswa/NPM </li>
     </ul>
     <br>
     <hr/>
     <h3>Dosen</h3>
     <ul>
-    <li>Menampilkan Daftar Data Dosen : /dosen/listDosen</li>
-    <li>Menampilkan Rincian Data Dosen : /dosen/detailDosen/Nip </li>
+    <li>Menampilkan Daftar Data Dosen   : /dosen/listDosen</li>
+    <li>Menampilkan Rincian Data Dosen  : /dosen/detailDosen/Nip </li>
+    <li>Menambahkan  Data Dosen         : /dosen/addDosen </li>
+    <li>Mengubah  Data Dosen            : /dosen/editDosen </li>
+    <li>Menghapus  Data Dosen           : /dosen/deleteDosen/Nip </li>
     </ul>
     <br>
     <hr/>
     <h3>Program Studi</h3>
     <ul>
-    <li>Menampilkan Daftar Data Program Studi : /studi/listStudi</li>
-    <li>Menampilkan Rincian Data Program Studi : /dosen/detailStudi/id-program-studi </li>
+    <li>Menampilkan Daftar Data Program Studi   : /studi/listStudi</li>
+    <li>Menampilkan Rincian Data Program Studi  : /studi/detailStudi/id_program_studi </li>
+    <li>Menambahkan Data Program Studi          : /studi/addStudi </li>
+    <li>Mengubah Data Program Studi             : /studi/editStudi </li>
+    <li>Menghapus Data Program Studi             : /studi/deleteStudi/id_program_studi </li>
     </ul>
 
        

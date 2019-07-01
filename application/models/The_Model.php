@@ -25,6 +25,24 @@ class The_Model extends CI_Model
         return $query;
     }
 
+    public function saveMahasiswa($data){
+        $query =  $this->db->insert($this->tb_mahasiswa,$data);
+        //print_r($data);
+        return $query;
+    }
+
+    public function updateMahasiswa($npm,$data){
+        $this->db->where('npm',$npm);
+        $query =  $this->db->update($this->tb_mahasiswa,$data);
+        return $query;
+    }
+
+    public function dropMahasiswa($npm){
+        $this->db->where('npm',$npm);
+        $query =  $this->db->delete($this->tb_mahasiswa);
+        return $query;
+    }
+
     function listDosen(){
         $data = $this->db->get($this->tb_dosen);
         return $data;
@@ -37,6 +55,24 @@ class The_Model extends CI_Model
         return $query;
     }
 
+    public function saveDosen($data){
+        $query =  $this->db->insert($this->tb_dosen,$data);
+        //print_r($data);
+        return $query;
+    }
+
+    public function updateDosen($nip,$data){
+        $this->db->where('nip',$nip);
+        $query =  $this->db->update($this->tb_dosen,$data);
+        return $query;
+    }
+
+    public function dropDosen($nip){
+        $this->db->where('nip',$nip);
+        $query =  $this->db->delete($this->tb_dosen);
+        return $query;
+    }
+
     function listStudi(){
         $data = $this->db->get($this->tb_studi);
         return $data;
@@ -46,6 +82,24 @@ class The_Model extends CI_Model
         $this->db->from($this->tb_studi);
         $this->db->where('id_program_studi',$idStudi);
         $query = $this->db->get();
+        return $query;
+    }
+
+    public function saveStudi($data){
+        $query =  $this->db->insert($this->tb_studi,$data);
+        //print_r($data);
+        return $query;
+    }
+
+    public function updateStudi($idStudi,$data){
+        $this->db->where('id_program_studi',$idStudi);
+        $query =  $this->db->update($this->tb_studi,$data);
+        return $query;
+    }
+
+    public function dropStudi($idStudi){
+        $this->db->where('id_program_studi',$idStudi);
+        $query =  $this->db->delete($this->tb_studi);
         return $query;
     }
        
