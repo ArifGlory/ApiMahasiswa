@@ -10,7 +10,7 @@ class The_Model extends CI_Model
 {
 
     var $tb_mahasiswa    = "tabel_mahasiswa";
-    var $tb_skripsi      = "tabel_mahasiswa";
+    var $tb_skripsi      = "wp_sik_usul_penelitian";
     var $tb_dosen        = "wp_dosen";
     var $tb_studi        = "tabel_program_studi";
     var $tb_jadwal       = "wp_jadwal";
@@ -144,11 +144,24 @@ class The_Model extends CI_Model
     }
 
 
+    function listSkripsi(){
+        $data = $this->db->get($this->tb_skripsi);
+        return $data;
+    }
+
+    function getSingleSkripsi($idSup){
+        $this->db->from($this->tb_skripsi);
+        $this->db->where('id_sup',$idSup);
+        $query = $this->db->get();
+        return $query;
+    }
+
+
     public function searchSkripsi($keyword){
         $this->db->select('*');
-        $this->db->like('npm',$keyword);
-        $this->db->or_like('nama',$keyword);
-        $query = $this->db->get($this->tb_mahasiswa);
+        $this->db->like('judul_skripsi',$keyword);
+        $this->db->or_like('nama_mahasiswa',$keyword);
+        $query = $this->db->get($this->tb_skripsi);
 
         return $query;
     }
