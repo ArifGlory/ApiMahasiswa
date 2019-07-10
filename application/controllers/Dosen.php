@@ -22,45 +22,56 @@ class Dosen extends REST_Controller{
         $this->response($dosen, 200);
     }
 
-    function addDosen_post(){
-        $data   = $this->input->post();
-        $insert =  $this->The_Model->saveDosen($data);
+    function search_get($keyword){
+        $search =  $this->The_Model->searchDosen($keyword);
 
-        if($insert){
-            $message = "Berhasil menaambahkan  data dosen";
-            $this->response($message,200);
+        if($search){
+           
+            $this->response($search->result(),200);
         }else{
             $this->response(array('status' => 'fail', 502));
         }
-        
     }
 
-    function editDosen_post(){
-        $data   = $this->input->post();
-        $nip    =  $data['nip'];
-        unset($data['nip']);
+    // function addDosen_post(){
+    //     $data   = $this->input->post();
+    //     $insert =  $this->The_Model->saveDosen($data);
 
-        $update =  $this->The_Model->updateDosen($nip,$data);
+    //     if($insert){
+    //         $message = "Berhasil menaambahkan  data dosen";
+    //         $this->response($message,200);
+    //     }else{
+    //         $this->response(array('status' => 'fail', 502));
+    //     }
         
-        if($update){
-            $message = "Berhasil mengubah  data Dosen";
-            $this->response($message,200);
-        }else{
-            $this->response(array('status' => 'fail', 502));
-        }
+    // }
 
-    }
+    // function editDosen_post(){
+    //     $data   = $this->input->post();
+    //     $nip    =  $data['nip'];
+    //     unset($data['nip']);
 
-    function deleteDosen_get($nip){
-        $delete = $this->The_Model->dropDosen($nip);
+    //     $update =  $this->The_Model->updateDosen($nip,$data);
+        
+    //     if($update){
+    //         $message = "Berhasil mengubah  data Dosen";
+    //         $this->response($message,200);
+    //     }else{
+    //         $this->response(array('status' => 'fail', 502));
+    //     }
+
+    // }
+
+    // function deleteDosen_get($nip){
+    //     $delete = $this->The_Model->dropDosen($nip);
       
-        if($delete){
-            $message = "Berhasil menghapus  data Dosen";
-            $this->response($message,200);
-        }else{
-            $this->response(array('status' => 'fail', 502));
-        }
-    }
+    //     if($delete){
+    //         $message = "Berhasil menghapus  data Dosen";
+    //         $this->response($message,200);
+    //     }else{
+    //         $this->response(array('status' => 'fail', 502));
+    //     }
+    // }
 
     
 }

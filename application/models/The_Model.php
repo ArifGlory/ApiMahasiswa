@@ -10,8 +10,10 @@ class The_Model extends CI_Model
 {
 
     var $tb_mahasiswa    = "tabel_mahasiswa";
+    var $tb_skripsi      = "tabel_mahasiswa";
     var $tb_dosen        = "wp_dosen";
     var $tb_studi        = "tabel_program_studi";
+    var $tb_jadwal       = "wp_jadwal";
 
     function listMahasiswa(){
         $data = $this->db->get($this->tb_mahasiswa);
@@ -41,6 +43,35 @@ class The_Model extends CI_Model
         $this->db->where('npm',$npm);
         $query =  $this->db->delete($this->tb_mahasiswa);
         return $query;
+    }
+
+    public function searchMahasiswa($keyword){
+        $this->db->select('*');
+        $this->db->like('npm',$keyword);
+        $this->db->or_like('nama',$keyword);
+        $query = $this->db->get($this->tb_mahasiswa);
+
+        return $query;
+    }
+
+    public function filterTahunMahasiswa($idTahun){
+        $q = $this->db->query("SELECT * FROM tabel_mahasiswa 
+        INNER JOIN tabel_tahun_masuk 
+            ON (tabel_mahasiswa.id_tahun_masuk = tabel_tahun_masuk.id_tahun_masuk)
+            WHERE tabel_mahasiswa.id_tahun_masuk = $idTahun
+            ORDER BY tabel_mahasiswa.id_tahun_masuk DESC");
+
+        return $q;
+    }
+
+    public function filterJurusanMahasiswa($idJurusan){
+        $q = $this->db->query("SELECT * FROM tabel_mahasiswa 
+        INNER JOIN tabel_program_studi 
+            ON (tabel_mahasiswa.id_program_studi = tabel_program_studi.id_program_studi)
+            WHERE tabel_mahasiswa.id_program_studi = $idJurusan
+            ORDER BY tabel_mahasiswa.id_program_studi DESC");
+
+        return $q;
     }
 
     function listDosen(){
@@ -73,6 +104,15 @@ class The_Model extends CI_Model
         return $query;
     }
 
+    public function searchDosen($keyword){
+        $this->db->select('*');
+        $this->db->like('nip',$keyword);
+        $this->db->or_like('nama',$keyword);
+        $query = $this->db->get($this->tb_dosen);
+
+        return $query;
+    }
+
     function listStudi(){
         $data = $this->db->get($this->tb_studi);
         return $data;
@@ -102,7 +142,39 @@ class The_Model extends CI_Model
         $query =  $this->db->delete($this->tb_studi);
         return $query;
     }
-       
+
+
+    public function searchSkripsi($keyword){
+        $this->db->select('*');
+        $this->db->like('npm',$keyword);
+        $this->db->or_like('nama',$keyword);
+        $query = $this->db->get($this->tb_mahasiswa);
+
+        return $query;
+    }
+    
+    function listJadwal(){
+        $data = $this->db->get($this->tb_jadwal);
+        return $data;
+    }
+
+    function getSingleJadwal($no_mk){
+        $this->db->from($this->tb_jadwal);
+        $this->db->where('nomormk',$no_mk);
+        $query = $this->db->get();
+        return $query;
+    }
+
+    public function searchJadwal($keyword){
+        $this->db->select('*');
+        $this->db->like('nomormk',$keyword);
+        $this->db->or_like('kodemk',$keyword);
+        $this->db->or_like('namamk',$keyword);
+        $query = $this->db->get($this->tb_jadwal);
+
+        return $query;
+    }
+
 
         
 }

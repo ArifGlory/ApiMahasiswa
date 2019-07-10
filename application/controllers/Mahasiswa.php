@@ -22,45 +22,77 @@ class Mahasiswa extends REST_Controller{
         $this->response($mahasiswa, 200);
     }
 
-    function addMahasiswa_post(){
-        $data   = $this->input->post();
-        $insert =  $this->The_Model->saveMahasiswa($data);
+    function search_get($keyword){
+        $search =  $this->The_Model->searchMahasiswa($keyword);
 
-        if($insert){
-            $message = "Berhasil menaambahkan  data mahasiswa";
-            $this->response($message,200);
+        if($search){
+           
+            $this->response($search->result(),200);
         }else{
             $this->response(array('status' => 'fail', 502));
         }
-        
     }
 
-    function editMahasiswa_post(){
-        $data   = $this->input->post();
-        $npm    =  $data['npm'];
-        unset($data['npm']);
+    function filterTahun_get($idTahun){
+        $filter =  $this->The_Model->filterTahunMahasiswa($idTahun);
 
-        $update =  $this->The_Model->updateMahasiswa($npm,$data);
-        
-        if($update){
-            $message = "Berhasil mengubah  data mahasiswa";
-            $this->response($message,200);
+        if($filter){
+            $this->response($filter->result(),200);
         }else{
             $this->response(array('status' => 'fail', 502));
         }
 
     }
 
-    function deleteMahasiswa_get($npm){
-        $delete = $this->The_Model->dropMahasiswa($npm);
+    function filterJurusan_get($idJurusan){
+        $filter =  $this->The_Model->filterJurusanMahasiswa($idJurusan);
+
+        if($filter){
+            $this->response($filter->result(),200);
+        }else{
+            $this->response(array('status' => 'fail', 502));
+        }
+    }
+
+    // function addMahasiswa_post(){
+    //     $data   = $this->input->post();
+    //     $insert =  $this->The_Model->saveMahasiswa($data);
+
+    //     if($insert){
+    //         $message = "Berhasil menaambahkan  data mahasiswa";
+    //         $this->response($message,200);
+    //     }else{
+    //         $this->response(array('status' => 'fail', 502));
+    //     }
+        
+    // }
+
+    // function editMahasiswa_post(){
+    //     $data   = $this->input->post();
+    //     $npm    =  $data['npm'];
+    //     unset($data['npm']);
+
+    //     $update =  $this->The_Model->updateMahasiswa($npm,$data);
+        
+    //     if($update){
+    //         $message = "Berhasil mengubah  data mahasiswa";
+    //         $this->response($message,200);
+    //     }else{
+    //         $this->response(array('status' => 'fail', 502));
+    //     }
+
+    // }
+
+    // function deleteMahasiswa_get($npm){
+    //     $delete = $this->The_Model->dropMahasiswa($npm);
       
-        if($delete){
-            $message = "Berhasil menghapus  data mahasiswa";
-            $this->response($message,200);
-        }else{
-            $this->response(array('status' => 'fail', 502));
-        }
-    }
+    //     if($delete){
+    //         $message = "Berhasil menghapus  data mahasiswa";
+    //         $this->response($message,200);
+    //     }else{
+    //         $this->response(array('status' => 'fail', 502));
+    //     }
+    // }
 
     
 }
