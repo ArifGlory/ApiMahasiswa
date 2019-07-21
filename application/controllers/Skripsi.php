@@ -25,7 +25,7 @@ class Skripsi extends REST_Controller{
     }
 
     function listSkripsi_get(){
-        $data = $this->The_Model->listSkripsi()->result();
+        $data = $this->The_Model->listSkripsi();
         $this->response($data, 200);
     }
 
