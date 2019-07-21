@@ -18,7 +18,7 @@ class Skripsi extends REST_Controller{
 
         if($search){
            
-            $this->response($search->result(),200);
+            $this->response($search,200);
         }else{
             $this->response(array('status' => 'fail', 502));
         }
@@ -30,7 +30,7 @@ class Skripsi extends REST_Controller{
     }
 
     function detailSkripsi_get($id_sup){
-        $skripsi = $this->The_Model->getSingleSkripsi($id_sup)->result();
+        $skripsi = $this->The_Model->getSingleSkripsi($id_sup);
         $this->response($skripsi, 200);
     }
 
