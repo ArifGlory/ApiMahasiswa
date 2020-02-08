@@ -13,24 +13,25 @@ class Skripsi extends REST_Controller{
         $this->load->model('The_Model');
     }
 
-    function search_get($keyword){
+    function searchByJudul_post(){
+		$keyword = $this->input->post('judul');
         $search =  $this->The_Model->searchSkripsi($keyword);
 
         if($search){
            
-            $this->response($search,200);
+            $this->response($search->result(),200);
         }else{
             $this->response(array('status' => 'fail', 502));
         }
     }
 
     function listSkripsi_get(){
-        $data = $this->The_Model->listSkripsi();
+        $data = $this->The_Model->listSkripsi()->result();
         $this->response($data, 200);
     }
 
-    function detailSkripsi_get($id_sup){
-        $skripsi = $this->The_Model->getSingleSkripsi($id_sup);
+    function detailSkripsi_get($id){
+        $skripsi = $this->The_Model->getSingleSkripsi($id)->result();
         $this->response($skripsi, 200);
     }
 

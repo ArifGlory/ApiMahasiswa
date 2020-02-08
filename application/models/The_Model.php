@@ -145,384 +145,34 @@ class The_Model extends CI_Model
 
 
     function listSkripsi(){
-        $q = $this->db->query("SELECT
-        wp_sik_usul_penelitian.id_sup
-        , wp_sik_usul_penelitian.nama_mahasiswa
-        , wp_sik_usul_penelitian.npm_mahasiswa
-        , wp_sik_usul_penelitian.judul_skripsi
-        , wp_sik_usul_penelitian.tanggal_sup
-        , wp_sik_usul_penelitian.waktu_sup
-        , wp_sik_usul_penelitian.nilai_sup
-        , wp_sik_usul_penelitian.formulir_penilaian
-        , wp_sik_usul_penelitian.formulir_berita_acara
-        , wp_dosen.nama
-        , detail_dosen_skripsi.peran
-    FROM
-        detail_dosen_skripsi
-        INNER JOIN wp_sik_usul_penelitian 
-            ON (detail_dosen_skripsi.id_skripsi = wp_sik_usul_penelitian.id_sup)
-        INNER JOIN wp_dosen 
-            ON (wp_dosen.nip = detail_dosen_skripsi.nip_dosen)
-            ORDER BY wp_sik_usul_penelitian.id_sup DESC");
+       $this->db->select('*');
+		$this->db->from('skripsi');
+		$this->db->join('tabel_mahasiswa', 'skripsi.npm = tabel_mahasiswa.npm');
+		$data = $this->db->get();
 
-         $result        = $q->result_array();
-         $listSkripsi   = array();
-         $id_sup        = 0;
-         $temp_id_sup   = 0;
-         $no            = 0;
-
-         foreach($result as $val){
-           
-             if($no > 0){
-                $id_sup = $val['id_sup'];
-              
-               
-                
-                //jika id nya masih sama
-                if($temp_id_sup == $id_sup){
-
-                    if($val['peran'] == "Pembimbing 1"){
-                        $skripsi['pembimbing1'] = $val['nama'];
-                     }else if($val['peran'] == "Pembimbing 2"){
-                        $skripsi['pembimbing2'] = $val['nama'];
-                     }else if($val['peran'] == "Pembahas 1"){
-                        $skripsi['pembahas1'] = $val['nama'];
-                     }else if($val['peran'] == "Pembahas 2"){
-                        $skripsi['pembahas2'] = $val['nama'];
-                     }
-                   
-                     if($no == count($result) - 1){
-                         $listSkripsi[] = $skripsi;
-                     }
-                    
-
-                     $temp_id_sup = $id_sup;
-
-                }else{
-                    $listSkripsi[] = $skripsi;
-                    $temp_id_sup = $id_sup;
-                    unset($skripsi);
-
-                    $skripsi = array(
-                        'id_sup'=>$val['id_sup'],
-                        'nama_mahasiswa'=>$val['nama_mahasiswa'],
-                        'npm_mahasiswa'=>$val['npm_mahasiswa'],
-                        'judul_skripsi'=>$val['judul_skripsi'],
-                        'tanggal_sup'=>$val['tanggal_sup'],
-                        'waktu_sup'=>$val['waktu_sup'],
-                        'nilai_sup'=>$val['nilai_sup'],
-                        'formulir_penilaian'=>$val['formulir_penilaian'],
-                        'formulir_berita_acara'=>$val['formulir_berita_acara']
-                     );
-    
-                     if($val['peran'] == "Pembimbing 1"){
-                        $skripsi['pembimbing1'] = $val['nama'];
-                     }else if($val['peran'] == "Pembimbing 2"){
-                        $skripsi['pembimbing2'] = $val['nama'];
-                     }else if($val['peran'] == "Pembahas 1"){
-                        $skripsi['pembahas1'] = $val['nama'];
-                     }else if($val['peran'] == "Pembahas 2"){
-                        $skripsi['pembahas2'] = $val['nama'];
-                     }
-
-
-                }
-
-             }else{
-                 //ketika iterator 0
-                $id_sup         = $val['id_sup'];
-                $temp_id_sup    = $val['id_sup'];
-
-                $skripsi = array(
-                    'id_sup'=>$val['id_sup'],
-                    'nama_mahasiswa'=>$val['nama_mahasiswa'],
-                    'npm_mahasiswa'=>$val['npm_mahasiswa'],
-                    'judul_skripsi'=>$val['judul_skripsi'],
-                    'tanggal_sup'=>$val['tanggal_sup'],
-                    'waktu_sup'=>$val['waktu_sup'],
-                    'nilai_sup'=>$val['nilai_sup'],
-                    'formulir_penilaian'=>$val['formulir_penilaian'],
-                    'formulir_berita_acara'=>$val['formulir_berita_acara']
-                 );
-
-                 if($val['peran'] == "Pembimbing 1"){
-                    $skripsi['pembimbing1'] = $val['nama'];
-                 }else if($val['peran'] == "Pembimbing 2"){
-                    $skripsi['pembimbing2'] = $val['nama'];
-                 }else if($val['peran'] == "Pembahas 1"){
-                    $skripsi['pembahas1'] = $val['nama'];
-                 }else if($val['peran'] == "Pembahas 2"){
-                    $skripsi['pembahas2'] = $val['nama'];
-                 }
-   
-
-             }
-           
-           
-            $no++;   
-         }
-         
-
-        //print_r($listSkripsi);
-        return $listSkripsi;
+		return $data;
     }
 
-    function getSingleSkripsi($idSup){
-        // $this->db->from($this->tb_skripsi);
-        // $this->db->where('id_sup',$idSup);
-        // $query = $this->db->get();
-        // return $query;
-        $q = $this->db->query("SELECT
-        wp_sik_usul_penelitian.id_sup
-        , wp_sik_usul_penelitian.nama_mahasiswa
-        , wp_sik_usul_penelitian.npm_mahasiswa
-        , wp_sik_usul_penelitian.judul_skripsi
-        , wp_sik_usul_penelitian.tanggal_sup
-        , wp_sik_usul_penelitian.waktu_sup
-        , wp_sik_usul_penelitian.nilai_sup
-        , wp_sik_usul_penelitian.formulir_penilaian
-        , wp_sik_usul_penelitian.formulir_berita_acara
-        , wp_dosen.nama
-        , detail_dosen_skripsi.peran
-        FROM
-        detail_dosen_skripsi
-        INNER JOIN wp_sik_usul_penelitian 
-            ON (detail_dosen_skripsi.id_skripsi = wp_sik_usul_penelitian.id_sup)
-        INNER JOIN wp_dosen 
-            ON (wp_dosen.nip = detail_dosen_skripsi.nip_dosen)
-            WHERE wp_sik_usul_penelitian.id_sup = $idSup
-            ORDER BY wp_sik_usul_penelitian.id_sup DESC");
+    function getSingleSkripsi($id){
+		$this->db->select('*');
+		$this->db->from('skripsi');
+		$this->db->join('tabel_mahasiswa', 'skripsi.npm = tabel_mahasiswa.npm');
+		$this->db->where('id',$id);
+		$data = $this->db->get();
 
-    $result        = $q->result_array();
-    $listSkripsi   = array();
-    $id_sup        = 0;
-    $temp_id_sup   = 0;
-    $no            = 0;
-
-    foreach($result as $val){
-    
-        if($no > 0){
-        $id_sup = $val['id_sup'];
-        
-        
-        
-        //jika id nya masih sama
-        if($temp_id_sup == $id_sup){
-
-            if($val['peran'] == "Pembimbing 1"){
-                $skripsi['pembimbing1'] = $val['nama'];
-                }else if($val['peran'] == "Pembimbing 2"){
-                $skripsi['pembimbing2'] = $val['nama'];
-                }else if($val['peran'] == "Pembahas 1"){
-                $skripsi['pembahas1'] = $val['nama'];
-                }else if($val['peran'] == "Pembahas 2"){
-                $skripsi['pembahas2'] = $val['nama'];
-                }
-            
-                if($no == count($result) - 1){
-                    $listSkripsi[] = $skripsi;
-                }
-            
-
-                $temp_id_sup = $id_sup;
-
-        }else{
-            $listSkripsi[] = $skripsi;
-            $temp_id_sup = $id_sup;
-            unset($skripsi);
-
-            $skripsi = array(
-                'id_sup'=>$val['id_sup'],
-                'nama_mahasiswa'=>$val['nama_mahasiswa'],
-                'npm_mahasiswa'=>$val['npm_mahasiswa'],
-                'judul_skripsi'=>$val['judul_skripsi'],
-                'tanggal_sup'=>$val['tanggal_sup'],
-                'waktu_sup'=>$val['waktu_sup'],
-                'nilai_sup'=>$val['nilai_sup'],
-                'formulir_penilaian'=>$val['formulir_penilaian'],
-                'formulir_berita_acara'=>$val['formulir_berita_acara']
-                );
-
-                if($val['peran'] == "Pembimbing 1"){
-                $skripsi['pembimbing1'] = $val['nama'];
-                }else if($val['peran'] == "Pembimbing 2"){
-                $skripsi['pembimbing2'] = $val['nama'];
-                }else if($val['peran'] == "Pembahas 1"){
-                $skripsi['pembahas1'] = $val['nama'];
-                }else if($val['peran'] == "Pembahas 2"){
-                $skripsi['pembahas2'] = $val['nama'];
-                }
-
-
-        }
-
-        }else{
-            //ketika iterator 0
-        $id_sup         = $val['id_sup'];
-        $temp_id_sup    = $val['id_sup'];
-
-        $skripsi = array(
-            'id_sup'=>$val['id_sup'],
-            'nama_mahasiswa'=>$val['nama_mahasiswa'],
-            'npm_mahasiswa'=>$val['npm_mahasiswa'],
-            'judul_skripsi'=>$val['judul_skripsi'],
-            'tanggal_sup'=>$val['tanggal_sup'],
-            'waktu_sup'=>$val['waktu_sup'],
-            'nilai_sup'=>$val['nilai_sup'],
-            'formulir_penilaian'=>$val['formulir_penilaian'],
-            'formulir_berita_acara'=>$val['formulir_berita_acara']
-            );
-
-            if($val['peran'] == "Pembimbing 1"){
-            $skripsi['pembimbing1'] = $val['nama'];
-            }else if($val['peran'] == "Pembimbing 2"){
-            $skripsi['pembimbing2'] = $val['nama'];
-            }else if($val['peran'] == "Pembahas 1"){
-            $skripsi['pembahas1'] = $val['nama'];
-            }else if($val['peran'] == "Pembahas 2"){
-            $skripsi['pembahas2'] = $val['nama'];
-            }
-
-
-        }
-    
-    
-    $no++;   
-    }
-
-
-    
-    return $listSkripsi;        
-
+		return $data;
 
     }
 
 
     public function searchSkripsi($keyword){
+    	$this->db->select('*');
+    	$this->db->from('skripsi');
+		$this->db->join('tabel_mahasiswa', 'skripsi.npm = tabel_mahasiswa.npm');
+		$this->db->like('skripsi.judul',$keyword);
+		$data = $this->db->get();
 
-        $q = $this->db->query("SELECT
-        wp_sik_usul_penelitian.id_sup
-        , wp_sik_usul_penelitian.nama_mahasiswa
-        , wp_sik_usul_penelitian.npm_mahasiswa
-        , wp_sik_usul_penelitian.judul_skripsi
-        , wp_sik_usul_penelitian.tanggal_sup
-        , wp_sik_usul_penelitian.waktu_sup
-        , wp_sik_usul_penelitian.nilai_sup
-        , wp_sik_usul_penelitian.formulir_penilaian
-        , wp_sik_usul_penelitian.formulir_berita_acara
-        , wp_dosen.nama
-        , detail_dosen_skripsi.peran
-        FROM
-        detail_dosen_skripsi
-        INNER JOIN wp_sik_usul_penelitian 
-            ON (detail_dosen_skripsi.id_skripsi = wp_sik_usul_penelitian.id_sup)
-        INNER JOIN wp_dosen 
-            ON (wp_dosen.nip = detail_dosen_skripsi.nip_dosen)
-            WHERE wp_sik_usul_penelitian.judul_skripsi LIKE '%".$keyword."'
-            OR wp_sik_usul_penelitian.nama_mahasiswa LIKE '%".$keyword."'
-            ORDER BY wp_sik_usul_penelitian.id_sup DESC");
-
-        $result        = $q->result_array();
-        $listSkripsi   = array();
-        $id_sup        = 0;
-        $temp_id_sup   = 0;
-        $no            = 0;
-
-    foreach($result as $val){
-    
-        if($no > 0){
-        $id_sup = $val['id_sup'];
-        
-        
-        
-        //jika id nya masih sama
-        if($temp_id_sup == $id_sup){
-
-            if($val['peran'] == "Pembimbing 1"){
-                $skripsi['pembimbing1'] = $val['nama'];
-                }else if($val['peran'] == "Pembimbing 2"){
-                $skripsi['pembimbing2'] = $val['nama'];
-                }else if($val['peran'] == "Pembahas 1"){
-                $skripsi['pembahas1'] = $val['nama'];
-                }else if($val['peran'] == "Pembahas 2"){
-                $skripsi['pembahas2'] = $val['nama'];
-                }
-            
-                if($no == count($result) - 1){
-                    $listSkripsi[] = $skripsi;
-                }
-            
-
-                $temp_id_sup = $id_sup;
-
-        }else{
-            $listSkripsi[] = $skripsi;
-            $temp_id_sup = $id_sup;
-            unset($skripsi);
-
-            $skripsi = array(
-                'id_sup'=>$val['id_sup'],
-                'nama_mahasiswa'=>$val['nama_mahasiswa'],
-                'npm_mahasiswa'=>$val['npm_mahasiswa'],
-                'judul_skripsi'=>$val['judul_skripsi'],
-                'tanggal_sup'=>$val['tanggal_sup'],
-                'waktu_sup'=>$val['waktu_sup'],
-                'nilai_sup'=>$val['nilai_sup'],
-                'formulir_penilaian'=>$val['formulir_penilaian'],
-                'formulir_berita_acara'=>$val['formulir_berita_acara']
-                );
-
-                if($val['peran'] == "Pembimbing 1"){
-                $skripsi['pembimbing1'] = $val['nama'];
-                }else if($val['peran'] == "Pembimbing 2"){
-                $skripsi['pembimbing2'] = $val['nama'];
-                }else if($val['peran'] == "Pembahas 1"){
-                $skripsi['pembahas1'] = $val['nama'];
-                }else if($val['peran'] == "Pembahas 2"){
-                $skripsi['pembahas2'] = $val['nama'];
-                }
-
-
-        }
-
-        }else{
-            //ketika iterator 0
-        $id_sup         = $val['id_sup'];
-        $temp_id_sup    = $val['id_sup'];
-
-        $skripsi = array(
-            'id_sup'=>$val['id_sup'],
-            'nama_mahasiswa'=>$val['nama_mahasiswa'],
-            'npm_mahasiswa'=>$val['npm_mahasiswa'],
-            'judul_skripsi'=>$val['judul_skripsi'],
-            'tanggal_sup'=>$val['tanggal_sup'],
-            'waktu_sup'=>$val['waktu_sup'],
-            'nilai_sup'=>$val['nilai_sup'],
-            'formulir_penilaian'=>$val['formulir_penilaian'],
-            'formulir_berita_acara'=>$val['formulir_berita_acara']
-            );
-
-            if($val['peran'] == "Pembimbing 1"){
-            $skripsi['pembimbing1'] = $val['nama'];
-            }else if($val['peran'] == "Pembimbing 2"){
-            $skripsi['pembimbing2'] = $val['nama'];
-            }else if($val['peran'] == "Pembahas 1"){
-            $skripsi['pembahas1'] = $val['nama'];
-            }else if($val['peran'] == "Pembahas 2"){
-            $skripsi['pembahas2'] = $val['nama'];
-            }
-
-
-        }
-    
-    
-    $no++;   
-    }
-
-
-    
-    return $listSkripsi;        
-
+		return $data;
 
     }
     
@@ -559,6 +209,28 @@ class The_Model extends CI_Model
 
         return $q;
     }
+
+    public function filterMahasiswaByTahunDanJurusan($tahun,$jurusan){
+    	$this->db->select('*');
+    	$this->db->from('tabel_mahasiswa');
+		$this->db->join('tabel_tahun_masuk', 'tabel_mahasiswa.id_tahun_masuk = tabel_tahun_masuk.id_tahun_masuk');
+		$this->db->join('tabel_program_studi', 'tabel_mahasiswa.id_program_studi = tabel_program_studi.id_program_studi');
+		$this->db->where('tabel_mahasiswa.id_tahun_masuk',$tahun);
+		$this->db->where('tabel_mahasiswa.id_program_studi',$jurusan);
+		$query = $this->db->get();
+
+		return $query;
+
+	}
+
+	function filterJurusanByNama($nama){
+    	$this->db->select('*');
+    	$this->db->from('tabel_program_studi');
+    	$this->db->like('program_studi',$nama);
+    	$data = $this->db->get();
+
+    	return $data;
+	}
 
 
         

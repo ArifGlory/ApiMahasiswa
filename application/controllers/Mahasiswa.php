@@ -33,6 +33,19 @@ class Mahasiswa extends REST_Controller{
         }
     }
 
+    function filterMahasiswa_post(){
+    	$tahun 		= $this->input->post('tahun');
+    	$jurusan 	= $this->input->post('jurusan');
+
+    	$filter = $this->The_Model->filterMahasiswaByTahunDanJurusan($tahun,$jurusan);
+
+		if($filter){
+			$this->response($filter->result(),200);
+		}else{
+			$this->response(array('status' => 'fail', 502));
+		}
+	}
+
     function filterTahun_get($idTahun){
         $filter =  $this->The_Model->filterTahunMahasiswa($idTahun);
 

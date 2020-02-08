@@ -17,23 +17,33 @@ class Studi extends REST_Controller{
         $this->response($data, 200);
     }
 
+    function filterJurusanByNama_post(){
+    	$nama = $this->input->post('nama_jurusan');
+
+    	$jurusan = $this->The_Model->filterJurusanByNama($nama)->result();
+
+		$this->response($jurusan, 200);
+
+
+	}
+
     function detailStudi_get($nip){
         $studi = $this->The_Model->getSingleStudi($nip)->result();
         $this->response($studi, 200);
     }
 
-    // function addStudi_post(){
-    //     $data   = $this->input->post();
-    //     $insert =  $this->The_Model->saveStudi($data);
+    function addStudi_post(){
+        $data   = $this->input->post();
+        $insert =  $this->The_Model->saveStudi($data);
 
-    //     if($insert){
-    //         $message = "Berhasil menaambahkan  data Studi";
-    //         $this->response($message,200);
-    //     }else{
-    //         $this->response(array('status' => 'fail', 502));
-    //     }
+        if($insert){
+            $message = "Berhasil menaambahkan  data Studi";
+            $this->response($message,200);
+        }else{
+            $this->response(array('status' => 'fail', 502));
+        }
         
-    // }
+    }
 
     // function editStudi_post(){
     //     $data   = $this->input->post();
