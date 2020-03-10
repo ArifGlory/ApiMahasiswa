@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aaff526f-c958-43d0-8f24-2c42175ab366" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/rest_ci.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/rest_ci.iml" afterDir="false" />
+    <list default="true" id="aaff526f-c958-43d0-8f24-2c42175ab366" name="Default" comment="menambahkan fitur fikter jurusan , filter mahasiswa by tahun dan jurusan">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/Mahasiswa.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Mahasiswa.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/Skripsi.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Skripsi.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/Studi.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Studi.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/models/The_Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/The_Model.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -124,8 +120,17 @@
       <workItem from="1567524566506" duration="694000" />
       <workItem from="1580008333580" duration="6322000" />
       <workItem from="1580210242439" duration="15000" />
-      <workItem from="1581140562611" duration="2830000" />
+      <workItem from="1581140562611" duration="3625000" />
+      <workItem from="1583836102309" duration="1232000" />
     </task>
+    <task id="LOCAL-00001" summary="menambahkan fitur fikter jurusan , filter mahasiswa by tahun dan jurusan">
+      <created>1581143556896</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1581143556896</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -143,5 +148,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="menambahkan fitur fikter jurusan , filter mahasiswa by tahun dan jurusan" />
+    <option name="LAST_COMMIT_MESSAGE" value="menambahkan fitur fikter jurusan , filter mahasiswa by tahun dan jurusan" />
   </component>
 </project>

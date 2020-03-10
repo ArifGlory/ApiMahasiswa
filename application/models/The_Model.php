@@ -215,8 +215,13 @@ class The_Model extends CI_Model
     	$this->db->from('tabel_mahasiswa');
 		$this->db->join('tabel_tahun_masuk', 'tabel_mahasiswa.id_tahun_masuk = tabel_tahun_masuk.id_tahun_masuk');
 		$this->db->join('tabel_program_studi', 'tabel_mahasiswa.id_program_studi = tabel_program_studi.id_program_studi');
-		$this->db->where('tabel_mahasiswa.id_tahun_masuk',$tahun);
-		$this->db->where('tabel_mahasiswa.id_program_studi',$jurusan);
+		if(isset($tahun)){
+			$this->db->where('tabel_mahasiswa.id_tahun_masuk',$tahun);
+		}
+		if (isset($jurusan)){
+			$this->db->where('tabel_mahasiswa.id_program_studi',$jurusan);
+		}
+
 		$query = $this->db->get();
 
 		return $query;
